@@ -135,13 +135,14 @@ body {
   min-height: 75%;
 }
 .feedback-section {
-            margin-top: 20px;
+            margin-top: 60px;
+            margin-left: 100px;
         }
 
         .feedback-form {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: left;
         }
 
         .feedback-input,
@@ -159,24 +160,28 @@ body {
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
+            border-width: 0px;
+            margin-right: 1120px;
         }
 
         .feedback-button:hover {
-            background-color: #000;
+            background-color: #55b07e;
         }
 
         .clear-button {
-            background-color: #ff0000;
+            background-color: #036e30;
             color: #fff;
             padding: 10px;
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
             margin-top: 10px;
+            border-width: 0px;
+            margin-right: 1120px;
         }
 
         .clear-button:hover {
-            background-color: #990000;
+            background-color: #9ee309;
         }
 
         .customer-feedback {
@@ -242,36 +247,45 @@ body {
 
     <script>
            function clearFeedback() {
+        var feedbackList = document.getElementById("feedback-list");
+        feedbackList.innerHTML = "";
+
+        // Clear feedback and username from local storage
+        localStorage.removeItem("feedback");
+        localStorage.removeItem("username");
+
+        // Reset input fields
+        document.getElementById("username-input").value = "";
+        document.getElementById("feedback-input").value = "";
+    }
+
+    // Function to submit feedback
+    function submitFeedback() {
+        var usernameInput = document.getElementById("username-input").value;
+        var feedbackInput = document.getElementById("feedback-input").value;
+
+        if (usernameInput.trim() !== "" && feedbackInput.trim() !== "") {
             var feedbackList = document.getElementById("feedback-list");
-            feedbackList.innerHTML = "";
-            // Clear feedback and username from local storage
-            localStorage.removeItem("feedback");
-            localStorage.removeItem("username");
-        }
 
-        // Function to submit feedback
-        function submitFeedback() {
-            var usernameInput = document.getElementById("username-input").value;
-            var feedbackInput = document.getElementById("feedback-input").value;
-
-            if (usernameInput.trim() !== "" && feedbackInput.trim() !== "") {
-                var feedbackList = document.getElementById("feedback-list");
-
-                // Limit to 20 feedback items
-                if (feedbackList.childElementCount >= 20) {
-                    feedbackList.removeChild(feedbackList.firstElementChild);
-                }
-
-                var feedbackItem = document.createElement("li");
-                feedbackItem.className = "feedback-item";
-                feedbackItem.textContent = `Username: ${usernameInput}, Feedback: ${feedbackInput}`;
-
-                feedbackList.appendChild(feedbackItem);
-
-                // Save feedback and username to local storage
-                saveFeedbackToLocalStorage();
+            // Limit to 20 feedback items
+            if (feedbackList.childElementCount >= 20) {
+                feedbackList.removeChild(feedbackList.firstElementChild);
             }
+
+            var feedbackItem = document.createElement("li");
+            feedbackItem.className = "feedback-item";
+            feedbackItem.textContent = `Username: ${usernameInput}, Feedback: ${feedbackInput}`;
+
+            feedbackList.appendChild(feedbackItem);
+
+            // Save feedback and username to local storage
+            saveFeedbackToLocalStorage();
+
+            // Reset input fields after submitting feedback
+            document.getElementById("username-input").value = "";
+            document.getElementById("feedback-input").value = "";
         }
+    }
 
         // Function to save feedback and username to local storage
         function saveFeedbackToLocalStorage() {
