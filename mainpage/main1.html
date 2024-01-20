@@ -249,8 +249,10 @@
   background-position: center;
   background-size: cover;
   background-image: url("nature.jpg");
-  min-height: 75%;
+  opacity: 1;
+    transition: opacity 0.5s ease-in-out;
 }
+
 tag {
     color: black;
 }
@@ -303,6 +305,14 @@ align-items: center;
 display: inline-block;
 }
 
+      .fade{
+        opacity: 1;
+        transition: opacity 50ms ease-in-out;
+      }
+
+      
+        
+
     </style>
     <title>DashBoard</title>
 </head>
@@ -321,7 +331,7 @@ display: inline-block;
             </ul>
         </nav>
     </header>
-<header class="bgimg" id="home">
+<header class="bgimg fade" id="home">
     <div class="display-bottomleft"><br><br>    
       <span class="tag">Calculate your Carbon Footprint</span>
     </div>
@@ -343,7 +353,7 @@ display: inline-block;
             
 
             <div class="column">
-                <h2>Your Country</h2>
+                <h3>Your Country</h3>
             <select id="country" class="select-box">
                 <option value="">--Select--</option>
                 <option value="India">India</option>
@@ -514,7 +524,27 @@ display: inline-block;
         }
 
         </script>
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script>
+            document.addEventListener('scroll', function () {
+                var scrollTop = window.scrollY;
+                var bgimg = document.querySelector('.bgimg');
+    
+                // Calculate the opacity based on the scroll position
+                var opacity = 1 - (scrollTop / 700); // You can adjust the divisor for a smoother or faster fade
+    
+                // Ensure the opacity is within the valid range [0, 1]
+                opacity = Math.min(1, Math.max(0, opacity));
+    
+                // Set the opacity of the background image
+                bgimg.style.opacity = opacity;
+            });
+    
+            function calculateEmissions() {
+                // ... your existing calculateEmissions function ...
+            }
+        </script>
+
         </body>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         </html>
