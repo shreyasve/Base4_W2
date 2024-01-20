@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="Screenshot 2024-01-20 160004.png" type="image/x-icon">
+    
     <style>
         body {
             font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
@@ -20,6 +21,16 @@
             padding: 1rem;
             text-align: center;
         }
+        .telegram-container {
+    position: fixed;
+    bottom: 20px; /* Adjust the distance from the bottom as needed */
+    right: 60px; /* Adjust the distance from the right as needed */
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.telegram {
+    display: block;
+}
 
         nav {
             display: flex;
@@ -345,7 +356,9 @@ input[type="radio"]:checked {
     background-color: #3f862a;
     border-color: #3f862a;
 }
-
+.telegram{
+    margin-left: 95%;
+}
 input[type="radio"]:checked::before {
     content: '✔';
     font-size: 14px;
@@ -545,6 +558,11 @@ input[type="radio"]:checked::before {
     <button onclick="redirectToDonationPage()">Donate Now</button>
     </div>
 </div>
+<div class="telegram-container">
+    <a href="https://t.me/carboncalci_bot" class="telegram">
+        <img src="Telegram-logo.png" alt="Telegram-Bot" style="width:42px;height:42px;">
+    </a>
+</div>
 
 <footer>
     <div class="footer-content">
@@ -584,7 +602,7 @@ input[type="radio"]:checked::before {
             const mealemission = isvegChecked ? 0.22 : 0.88;
             const dietEmissions = ((mealemission * normalizedMeals) / 1000).toFixed(2);
             const wasteEmissions = ((0.1 * normalizedWaste) / 1000).toFixed(2);
-            const airdistanceEmissions = ((0.24 * airdistance) / 1000).toFixed(2);
+            const airdistanceEmissions = ((0.44 * airdistance) / 1000).toFixed(2);
         
             let totalEmissions = (
                 parseFloat(transportationEmissions) +

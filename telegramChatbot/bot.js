@@ -54,27 +54,24 @@ bot.on("message", async (msg) => {
                 await askUserQuestion(chatId, "Enter your 🍽️ Number of meals per day");
                 meals = await getUserResponse(chatId);
 
-                const yearlyDistance = distance * 365;
-                const yearlyElectricity = electricity * 12;
-                const yearlyMeals = meals * 365;
-                const yearlyWaste = waste * 52;
+                const normalizedDistance = distance > 0 ? (distance * 365).toFixed(2) : 0;
+                const normalizedElectricity = electricity > 0 ? (electricity * 12).toFixed(2) : 0;
+                const normalizedMeals = meals > 0 ? (meals * 365).toFixed(2) : 0;
+                const normalizedWaste = waste > 0 ? (waste * 52).toFixed(2) : 0;
 
-                // Calculate carbon emissions
-                const transportationEmissions = EMISSION_FACTORS["India"]["Transportation"] * yearlyDistance;
-                const electricityEmissions = EMISSION_FACTORS["India"]["Electricity"] * yearlyElectricity;
-                const dietEmissions = EMISSION_FACTORS["India"]["Diet"] * yearlyMeals;
-                const wasteEmissions = EMISSION_FACTORS["India"]["Waste"] * yearlyWaste;
+                const transportationEmissions = ((0.14 * normalizedDistance) / 1000).toFixed(2);
+                const dietEmissions = ((1.25 * normalizedMeals) / 1000).toFixed(2);
+            const wasteEmissions = ((0.1 * normalizedWaste) / 1000).toFixed(2);
+            const electricityEmissions = ((0.82 * normalizedElectricity) / 1000).toFixed(2);
 
-                // Convert emissions to tonnes and round off to 2 decimal points
-                const roundedTransportation = (transportationEmissions / 1000).toFixed(2);
-                const roundedElectricity = (electricityEmissions / 1000).toFixed(2);
-                const roundedDiet = (dietEmissions / 1000).toFixed(2);
-                const roundedWaste = (wasteEmissions / 1000).toFixed(2);
-
-                // Calculate total emissions
-                const totalEmissions = (transportationEmissions + electricityEmissions + dietEmissions + wasteEmissions).toFixed(2);
-                bot.sendMessage(chatId, `Results:\n\nTransportation: ${roundedTransportation} tonnes CO2 per year\nElectricity: ${roundedElectricity} tonnes CO2 per year\nDiet: ${roundedDiet} tonnes CO2 per year\nWaste: ${roundedWaste} tonnes CO2 per year\n\nTotal Carbon Footprint: ${totalEmissions} tonnes CO2 per year`);
-                bot.sendMessage(chatId, "Please choose '1' to calculate again or '2' for getting your doubts cleared.");
+            let totalEmissions = (
+                parseFloat(transportationEmissions) +
+                parseFloat(electricityEmissions) +
+                parseFloat(dietEmissions) +
+                parseFloat(wasteEmissions)
+                ).toFixed(2);
+                bot.sendMessage(chatId, `Results:\n\nTransportation: ${transportationEmissions} tonnes CO2 per year\nElectricity: ${electricityEmissions} tonnes CO2 per year\nDiet: ${dietEmissions} tonnes CO2 per year\nWaste: ${wasteEmissions} tonnes CO2 per year\n\nTotal Carbon Footprint: ${totalEmissions} tonnes CO2 per year`);
+                await bot.sendMessage(chatId, "Please choose '1' to calculate again or '2' for getting your doubts cleared.");
                 break;
 
             case '2':
@@ -84,7 +81,7 @@ bot.on("message", async (msg) => {
                         model: "gpt-3.5-turbo",
                         messages: [
                             { "role": "user", "content": msg1.text },
-                            { "role": "system", "content": "You will answer only to queries related to nature and the environment. If it is not related, just say I am only authorized to answer questions related to Environment and nature" }
+                            { "role": "system", "content": "You will answer only to queries related to nature, carbon, emission,fuel, diet emissions and the environment. If it is not related, just say I am only authorized to answer questions related to Environment and nature. Dont send the 'I am not authorized message'when the choice 2 is typed" }
                         ],
                         temperature: 0.5,
                     });

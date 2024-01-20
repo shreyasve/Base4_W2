@@ -1,68 +1,85 @@
-function calculateEmissions() {
-    const country = document.getElementById('country').value;
-    const distance = document.getElementById('distance').value;
-    const airdistance = document.getElementById('airdistance').value;
-    const electricity = document.getElementById('electricity').value;
-    const waste = document.getElementById('waste').value;
-    const meals = document.getElementById('meals').value;
-    const checkBox = document.getElementById("myCheck");
+const chatbotToggler = document.querySelector(".chatbot-toggler");
+const closeBtn = document.querySelector(".close-btn");
+const chatbox = document.querySelector(".chatbox");
+const chatInput = document.querySelector(".chat-input textarea");
+const sendChatBtn = document.querySelector(".chat-input span");
 
-    const normalizedDistance = distance > 0 ? distance * 365 : 0;
-    const normalizedElectricity = electricity > 0 ? electricity * 12 : 0;
-    const normalizedMeals = meals > 0 ? meals * 365 : 0;
-    const normalizedWaste = waste > 0 ? waste * 52 : 0;
+let userMessage = null; 
 
-    const transportationEmissions = (0.14 * normalizedDistance) / 1000;
-    const electricityEmissions = (0.82 * normalizedElectricity) / 1000;
-    const dietEmissions = (1.25 * normalizedMeals) / 1000;
-    const wasteEmissions = (0.1 * normalizedWaste) / 1000;
-    const airdistanceEmissions = (0.24 * airdistance) / 1000;
+const inputInitHeight = chatInput.scrollHeight;
+const API_KEY="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";
+const createChatLi = (message, className) => {
+    
+    const chatLi = document.createElement("li");
+    chatLi.classList.add("chat", className);
+    let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
+    chatLi.innerHTML = chatContent;
+    chatLi.querySelector("p").textContent = message;
+    return chatLi; 
+}
 
-    totalEmissions = (
-        transportationEmissions +
-        electricityEmissions +
-        dietEmissions +
-        wasteEmissions +
-        airdistanceEmissions
-    ).toFixed(2);
+const generateResponse = (incomingChatLi) => {
+    const API_URL = "https://api.openai.com/v1/chat/completions";
+    const messageElement = incomingChatLi.querySelector("p");
 
-    if (checkBox.checked == true) {
-        totalEmissions = totalEmissions - 0.059;
+    
+    const requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`
+        },
+        body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{role: "user", content: userMessage},
+            { "role": "system", "content": "You will answer only to queries related to nature and the environment. If it is not related, just say I am only authorized to answer questions related to Environment and nature" }      
+        ],
+        })
     }
 
-    document.getElementById('transportation').innerText = `🚗 Transportation: ${transportationEmissions} tonnes CO2 per year`;
-    document.getElementById('electricity').innerText = `💡 Electricity: ${electricityEmissions} tonnes CO2 per year`;
-    document.getElementById('airdistance').innerText = `✈️ Air Distance: ${airdistanceEmissions} tonnes CO2 per year`;
-    document.getElementById('diet').innerText = `🍽️ Diet: ${dietEmissions} tonnes CO2 per year`;
-    document.getElementById('waste').innerText = `🗑️ Waste: ${wasteEmissions} tonnes CO2 per year`;
-
-    document.getElementById('total').innerText = `🌍 Your total carbon footprint is: ${totalEmissions} tonnes CO2 per year`;
-    document.getElementById('warning').innerText =
-        "In 2021, CO2 emissions per capita for India was 1.9 tons of CO2 per capita. Between 1972 and 2021, CO2 emissions per capita of India grew substantially from 0.39 to 1.9 tons of CO2 per capita rising at an increasing annual rate that reached a maximum of 9.41% in 2021";
     
-        const xValues = ["Distance", "AirTravelDistance", "Electricity", "Food", "Waste"];
-        const yValues = [transportationEmissions, airdistanceEmissions, electricityEmissions, dietEmissions, wasteEmissions];
-        const barColors = [
-            "#b91d47",
-            "#00aba9",
-            "#2b5797",
-            "#e8c3b9",
-            "#1e7145"
-        ];
-        new Chart("myChart", {
-            type: "doughnut",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Your Carbon Emissions"
-                }
-            }
-        });
+    fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
+        messageElement.textContent = data.choices[0].message.content.trim();
+    }).catch((error) => {
+        messageElement.textContent = "Oops! Something went wrong. Please try again.";
+    }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
 }
+
+const handleChat = () => {
+    userMessage = chatInput.value.trim(); 
+    if(!userMessage) return;
+
+    
+    chatInput.value = "";
+    chatInput.style.height = `${inputInitHeight}px`;
+
+    
+    chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+    chatbox.scrollTo(0, chatbox.scrollHeight);
+    
+    setTimeout(() => {
+        
+        const incomingChatLi = createChatLi("Thinking...", "incoming");
+        chatbox.appendChild(incomingChatLi);
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+        generateResponse(incomingChatLi);
+    }, 600);
+}
+
+chatInput.addEventListener("input", () => {
+    
+    chatInput.style.height = `${inputInitHeight}px`;
+    chatInput.style.height = `${chatInput.scrollHeight}px`;
+});
+
+chatInput.addEventListener("keydown", (e) => {
+    
+    if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+        e.preventDefault();
+        handleChat();
+    }
+});
+
+sendChatBtn.addEventListener("click", handleChat);
+closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
