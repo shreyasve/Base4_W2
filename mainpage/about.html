@@ -133,7 +133,15 @@ body {
   background-size: cover;
   background-image: url("nature2.webp");
   min-height: 75%;
+  opacity: 1;
+    transition: opacity 0.5s ease-in-out;
 }
+
+.fade{
+        opacity: 1;
+        transition: opacity 10ms ease-in-out;
+      }
+
     </style>
     <title>About</title>
 </head>
@@ -191,7 +199,7 @@ body {
         <h1>Meet Our Team</h1>
         <div class="team-cards">
             <div class="card">
-                <div class="card-img">
+                <div class="card-img ">
                     <img src="shreyas.jpg" alt="User 1">
                 </div>
                 <div class="card-info">
@@ -251,6 +259,27 @@ body {
             }
         }
     </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script>
+    document.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY;
+        var bgimg = document.querySelector('.bgimg');
+
+        // Calculate the opacity based on the scroll position
+        var opacity = 1 - (scrollTop / 700); // You can adjust the divisor for a smoother or faster fade
+
+        // Ensure the opacity is within the valid range [0, 1]
+        opacity = Math.min(1, Math.max(0, opacity));
+
+        // Set the opacity of the background image
+        bgimg.style.opacity = opacity;
+    });
+
+    function calculateEmissions() {
+        // ... your existing calculateEmissions function ...
+    }
+</script>
 </body>
 
 </html>
