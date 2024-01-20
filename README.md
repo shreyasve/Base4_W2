@@ -1,2 +1,2 @@
-ls# Infothon
+# Infothon
 <br>Repository for infothon<br>
