@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="Screenshot 2024-01-20 160004.png" type="image/x-icon">
     <style>
         body {
             font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
@@ -71,11 +70,6 @@
             padding: 2rem;
             text-align: center;
         }
-        .checkbox-container.column {
-    display: flex;
-    flex-direction: row; /* Arrange items horizontally */
-    align-items: center; /* Align items vertically in the center */
-}
 
         .team h1 {
             color: #333;
@@ -239,10 +233,6 @@
             margin-left: 100px;
             margin-right:100px;
         }
-        .badge {
-            max-width: 100px;
-            margin-top: 20px;
-        }
 
         canvas {
             width: 100%;
@@ -301,79 +291,6 @@ tag {
             margin-bottom: 10px;
             padding: 10px;
         }
-        .square {
-border: 1px solid black;
-padding: 10px;
-width: 700px;
-display: inline-block;
-}
-.fuel-options {
-    display: flex;
-    justify-content: space-around;
-    align-items: center; 
-}
-
-.fuel-options .column {
-    display: flex;
-    flex-direction: row; 
-    align-items: center; 
-}
-
-.fuel-options .column h3 {
-    margin-right: 0.5rem;
-}
-
-.fuel-options .column .radio-container {
-    margin-left: 0.5rem;
-}
-
-input[type="radio"] {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #3f862a;
-    border-radius: 50%;
-    outline: none;
-    transition: background-color 0.3s, border-color 0.3s;
-    cursor: pointer;
-    margin-right: 8px; 
-}
-
-input[type="radio"]:checked {
-    background-color: #3f862a;
-    border-color: #3f862a;
-}
-
-input[type="radio"]:checked::before {
-    content: '✔';
-    font-size: 14px;
-    color: #fff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.meal-options {
-    display: flex;
-    justify-content: space-around;
-    align-items: center; 
-}
-
-.meal-options .column {
-    display: flex;
-    flex-direction: row; 
-    align-items: center; 
-}
-
-.meal-options .column h3 {
-    margin-right: 0.5rem;
-}
-
-.meal-options .column .radio-container {
-    margin-left: 0.5rem;
-}
 
     </style>
     <title>DashBoard</title>
@@ -419,61 +336,8 @@ input[type="radio"]:checked::before {
             <select id="country" class="select-box">
                 <option value="">--Select--</option>
                 <option value="India">India</option>
+                <option value="America">America</option>
             </select>
-            <h2>Your State</h2>
-            <select id="state" class="select-box">
-                <option value="">--Select--</option>
-                <option value="Andaman & Nicobar">Andaman & Nicobar</option>
-                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                <option value="Assam">Assam</option>
-                <option value="Bihar">Bihar</option>
-                <option value="Chandigarh">Chandigarh</option>
-                <option value="Chhattisgarh">Chhattisgarh</option>
-                <option value="Dadra & Nagar Haveli">Dadra & Nagar Haveli</option>
-                <option value="Daman & Diu">Daman & Diu</option>
-                <option value="Delhi">Delhi</option>
-                <option value="Goa">Goa</option>
-                <option value="Gujarat">Gujarat</option>
-                <option value="Haryana">Haryana</option>
-                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                <option value="Jammu & Kashmir">Jammu & Kashmir</option>
-                <option value="Jharkhand">Jharkhand</option>
-                <option value="Karnataka">Karnataka</option>
-                <option value="Kerala">Kerala</option>
-                <option value="Lakshadweep">Lakshadweep</option>
-                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                <option value="Maharashtra">Maharashtra</option>
-                <option value="Manipur">Manipur</option>
-                <option value="Meghalaya">Meghalaya</option>
-                <option value="Mizoram">Mizoram</option>
-                <option value="Nagaland">Nagaland</option>
-                <option value="Orissa">Orissa</option>
-                <option value="Pondicherry">Pondicherry</option>
-                <option value="Punjab">Punjab</option>
-                <option value="Rajasthan">Rajasthan</option>
-                <option value="Sikkim">Sikkim</option>
-                <option value="Tamil Nadu">Tamil Nadu</option>
-                <option value="Tripura">Tripura</option>
-                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                <option value="Uttarakhand">Uttarakhand</option>
-                <option value="West Bengal">West Bengal</option>
-            </select>
-
-            <div class="fuel-options">
-                <div class="column">
-                    <h3>Petrol</h3>
-                    <div class="radio-container">
-                        <input type="radio" id="Petrol" name="fuelType" checked>
-                    </div>
-                </div>
-                <div class="column">
-                    <h3>Diesel</h3>
-                    <div class="radio-container">
-                        <input type="radio" id="Diesel" name="fuelType">
-                    </div>
-                </div>
-            </div>
                 <h3>Daily commute distance (in km)</h3>
                 <input type="number" id="distance" min="0">
 
@@ -488,20 +352,6 @@ input[type="radio"]:checked::before {
                 <h3>Waste generated per week (in kg)</h3>
                 <input type="number" id="wasteInput" min="0">
 
-                <div class="meal-options">
-                    <div class="column">
-                        <h3>Veg</h3>
-                        <div class="radio-container">
-                            <input type="radio" id="Veg" name="mealType" checked>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <h3>NonVeg</h3>
-                        <div class="radio-container">
-                            <input type="radio" id="Nonveg" name="mealType">
-                        </div>
-                    </div>
-                </div>
                 <h3>Number of meals per day</h3>
                 <input type="number" id="meals" min="0">
 
@@ -532,10 +382,6 @@ input[type="radio"]:checked::before {
                 <h3>Total Carbon Footprint</h3>
                 <p id="total"></p>
                 <p id="warning"></p>
-                <p id="stateemission"></p>
-                
-                <div class="square"><h4>Recommendations</h4><p id="personalrecomendations1"><p id="personalrecomendations2"><p id="personalrecomendations3"><p id="personalrecomendations4"><p id="personalrecomendations5"><p id="personalrecomendations6"><p id="personalrecomendations7"></p></div>
-                
             </div>
         </div>
         <canvas id="myChart" style="width:150%;max-width:900px";align-items:center></canvas>
@@ -563,7 +409,6 @@ input[type="radio"]:checked::before {
     <script>
         function calculateEmissions() {
             const country = document.getElementById('country').value;
-            const stateName = document.getElementById('state').value;
             const distance = document.getElementById('distance').value;
             const airdistance = document.getElementById('airdistanceInput').value;
             const electricity = document.getElementById('electricity').value;
@@ -575,14 +420,10 @@ input[type="radio"]:checked::before {
             const normalizedElectricity = electricity > 0 ? (electricity * 12).toFixed(2) : 0;
             const normalizedMeals = meals > 0 ? (meals * 365).toFixed(2) : 0;
             const normalizedWaste = waste > 0 ? (waste * 52).toFixed(2) : 0;
-            
-            const isPetrolChecked = document.getElementById('Petrol').checked;
-            const fuelemission = isPetrolChecked ? 0.11 : 0.17;
-            const transportationEmissions = ((fuelemission * normalizedDistance) / 1000).toFixed(2);
+        
+            const transportationEmissions = ((0.14 * normalizedDistance) / 1000).toFixed(2);
             const electricityEmissions = ((0.82 * normalizedElectricity) / 1000).toFixed(2);
-            const isvegChecked = document.getElementById('Veg').checked;
-            const mealemission = isvegChecked ? 0.22 : 0.88;
-            const dietEmissions = ((mealemission * normalizedMeals) / 1000).toFixed(2);
+            const dietEmissions = ((0.55 * normalizedMeals) / 1000).toFixed(2);
             const wasteEmissions = ((0.1 * normalizedWaste) / 1000).toFixed(2);
             const airdistanceEmissions = ((0.24 * airdistance) / 1000).toFixed(2);
         
@@ -606,31 +447,8 @@ input[type="radio"]:checked::before {
         
             document.getElementById('total').innerText = `🌍 Your total carbon footprint is: ${totalEmissions} tonnes CO2 per year`;
             document.getElementById('warning').innerText =
-                "CO2 emissions per capita for India was 1.7 tons of CO2 per capita. Between 1972 and 2021, CO2 emissions per capita of India grew substantially from 0.39 to 1.7 tons of CO2 per capita rising at an increasing annual rate that reached a maximum of 9.41%";
-                document.getElementById('stateemission').innerText = `🌍 the average carbon footprint of your state is : ${getEmissionValue(stateName)} tonnes CO2 per year`;
-
-            
-            if((totalEmissions>1.9) && (distance>5)){
-                document.getElementById('personalrecomendations1').innerText ="Consider using public transport, carpooling, or switching to more fuel-efficient vehicles.Explore the possibility of walking or cycling for shorter distances.";
-            }
-            if((totalEmissions>1.9) && (airdistance>500)){
-                document.getElementById('personalrecomendations2').innerText ="Minimize air travel whenever possible.Choose direct flights as they generally have lower carbon emissions.";
-            }
-            if((totalEmissions>1.9) && (electricity>100)){
-                document.getElementById('personalrecomendations3').innerText ="Opt for energy-efficient appliances.Turn off lights and electronic devices when not in use.Consider using renewable energy sources if available.";
-            }
-            if((totalEmissions>1.9) && (meals>3)){
-                document.getElementById('personalrecomendations4').innerText ="Include more plant-based meals in your diet.Reduce food waste by planning meals and storing food properly.";
-            }
-            if((totalEmissions>1.9) && (waste>5)){
-                document.getElementById('personalrecomendations5').innerText ="Practice proper waste segregation and recycling.Reduce single-use plastics and choose eco-friendly alternatives.";
-            }
-            if((totalEmissions>1.9) && !(checkBox.checked)){
-                document.getElementById('personalrecomendations6').innerText ="start recycling newspapers to contribute to waste reduction.";
-            }
-            if(totalEmissions<1.9){
-                document.getElementById('personalrecomendations7').innerText ="Support environmental organizations and initiatives.Stay informed about sustainable practices and implement them in your daily life.Encourage others to adopt eco-friendly habits.";
-            }
+                "In 2021, CO2 emissions per capita for India was 1.9 tons of CO2 per capita. Between 1972 and 2021, CO2 emissions per capita of India grew substantially from 0.39 to 1.9 tons of CO2 per capita rising at an increasing annual rate that reached a maximum of 9.41% in 2021";
+        
             const xValues = ["Distance", "AirTravelDistance", "Electricity", "Food", "Waste"];
             const yValues = [parseFloat(transportationEmissions), parseFloat(airdistanceEmissions), parseFloat(electricityEmissions), parseFloat(dietEmissions), parseFloat(wasteEmissions)];
             const barColors = [
@@ -657,81 +475,7 @@ input[type="radio"]:checked::before {
                 }
             });
         }
-        function getEmissionValue(stateName) {
-    if (stateName === "Andaman & Nicobar") {
-        return 1.94;
-    } else if (stateName === "Andhra Pradesh") {
-        return 1.50;
-    } else if (stateName === "Arunachal Pradesh") {
-        return 0.37;
-    } else if (stateName === "Assam") {
-        return 0.33;
-    } else if (stateName === "Bihar") {
-        return 0.35;
-    } else if (stateName === "Chandigarh") {
-        return 0.74;
-    } else if (stateName === "Chhattisgarh") {
-        return 3.90;
-    } else if (stateName === "Dadra & Nagar Haveli") {
-        return 1.29;
-    } else if (stateName === "Daman & Diu") {
-        return 1.70;
-    } else if (stateName === "Delhi") {
-        return 1.15;
-    } else if (stateName === "Goa") {
-        return 1.60;
-    } else if (stateName === "Gujarat") {
-        return 1.68;
-    } else if (stateName === "Haryana") {
-        return 1.67;
-    } else if (stateName === "Himachal Pradesh") {
-        return 0.38;
-    } else if (stateName === "Jammu & Kashmir") {
-        return 0.32;
-    } else if (stateName === "Jharkhand") {
-        return 0.95;
-    } else if (stateName === "Karnataka") {
-        return 0.88;
-    } else if (stateName === "Kerala") {
-        return 0.47;
-    } else if (stateName === "Lakshadweep") {
-        return 1.72;
-    } else if (stateName === "Madhya Pradesh") {
-        return 1.36;
-    } else if (stateName === "Maharashtra") {
-        return 1.40;
-    } else if (stateName === "Manipur") {
-        return 0.27;
-    } else if (stateName === "Meghalaya") {
-        return 0.40;
-    } else if (stateName === "Mizoram") {
-        return 0.28;
-    } else if (stateName === "Nagaland") {
-        return 0.20;
-    } else if (stateName === "Orissa") {
-        return 1.70;
-    } else if (stateName === "Pondicherry") {
-        return 1.10;
-    } else if (stateName === "Punjab") {
-        return 1.14;
-    } else if (stateName === "Rajasthan") {
-        return 0.91;
-    } else if (stateName === "Sikkim") {
-        return 0.43;
-    } else if (stateName === "Tamil Nadu") {
-        return 1.27;
-    } else if (stateName === "Tripura") {
-        return 0.80;
-    } else if (stateName === "Uttar Pradesh") {
-        return 0.77;
-    } else if (stateName === "Uttarakhand") {
-        return 0.37;
-    } else if (stateName === "West Bengal") {
-        return 1.07;
-    } else {
-        return "State not found";
-    }
-}
+
         </script>
         
         </body>
