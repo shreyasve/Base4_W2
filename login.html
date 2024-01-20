@@ -12,7 +12,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('https://spadework.org.uk/wp-content/uploads/istockphoto-1387784358-170667a.jpg'); /* Replace with the path to your background image */
+            background-image: url(earth.jpg); 
             background-size: cover;
             background-position: center;
         }
@@ -20,7 +20,7 @@
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(91, 89, 89, 0.1);
             max-width: 400px;
             width: 100%;
             
@@ -55,14 +55,34 @@
             max-width: 100%;
             height: auto;
             margin-bottom: 20px;
+            margin-right: 10px;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+        }
+
+        .text {
+            text-align: right;
+            padding-left: 5%;
+            margin-bottom: 30px;
+            font-size: larger;
+            color: #3fb743;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
     </style>
 </head>
 <body>
     <form action="your-server-side-login-script.php" method="post">
-        <img class="logo" src="https://img.freepik.com/free-vector/flat-design-carbon-footprint-label_23-2149404813.jpg" alt="Logo" width="100"> <!-- Replace with the path to your logo image -->
+        <div class="container">
+            <img class="logo" src="https://img.freepik.com/free-vector/flat-design-carbon-footprint-label_23-2149404813.jpg" alt="Logo" width="100">
+            <div class="text">
+                <b >CARBOGRAPHY</b>
+            </div>
+        </div>
 
-        <label for="username">Username:</label>
+       <label for="username">Username:</label>
         <input type="text" id="username" name="username" required >
 
         <label for="password">Password:</label>
