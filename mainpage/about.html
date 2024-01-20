@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>
+body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 1rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .about {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .about-info {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .team {
+            background-color: #f4f4f4;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .team h1 {
+            color: #333;
+        }
+
+        .team-cards {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-info {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .button {
+            background-color: #ffffff;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #555;
+        }
+
+        footer {
+            background-color: #2b2b28;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("nature2.webp");
+  min-height: 75%;
+}
+    </style>
+    <title>About</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                CarbonFootPrint
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+<header class="bgimg" id="home">
+    <div class="display-bottomleft"><br><br>    
+      <span class="tag">Hello!</span>
+    </div>
+    <br><br><br>
+    <div class="display-middle">
+      <span class="text-white" style="font-size:90px">Carbography<br></span>
+      <br><br>
+    </div>
+    <div class="display-bottomright">
+      <span class="text-white">Your Eco-Calculator</span>
+    </div>
+  </header>
+  
+  <div class="sand">
+
+    <section class="about">
+        <h1>About</h1>
+        <p style="font-weight: bold">
+            Welcome to our About page, where we explore our commitment to sustainability and reducing our carbon footprint.
+        </p>
+        <div class="about-info">
+            <div class="about-img">
+                <img src="Screenshot 2024-01-20 160004.png" width= 300px height= 300px ="CarbonFootPrint">
+            </div>
+            <div>
+                <p>Welcome to our website! We're your go-to source for understanding and calculating carbon footprints. In a world where environmental awareness is crucial, we aim to provide simple and accessible information about carbon footprints. Whether you're an individual or a business, understanding your carbon footprint is the first step towards making environmentally conscious choices.</p>
+                <div class="hidden-info" id="moreInfo">
+                    <p>Explore our user-friendly tools and resources designed to help you calculate and comprehend your carbon impact. We believe that knowledge is power, and by making informed decisions, we can all contribute to a greener and more sustainable future. Dive into the world of carbon footprint calculation with us, and let's work together to reduce our collective environmental impact.</p>
+                </div>
+                <button onclick="toggleInfo()">Read More...</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="team">
+        <h1>Meet Our Team</h1>
+        <div class="team-cards">
+            <div class="card">
+                <div class="card-img">
+                    <img src="shreyas.jpg" alt="User 1">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-name">Shreyas V E</h2>
+                    <p class="card-role">CEO and Founder</p>
+                    <p class="card-email">shreyasve@gmail.com</p>
+                    <p><button class="button"><a href="#">Contact</a></button></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="pra.jpg" alt="User 2">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-name">Pramukh B V</h2>
+                    <p class="card-role">Co-Founder</p>
+                    <p class="card-email">pramukhvishwanath@gmial.com</p>
+                    <p><button class="button"><a href="#">Contact</a></button></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <!-- Add the image source here -->
+                    <img src="naga.jpg" alt="Naga Sudarshan C G">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-name">Naga Sudarshan C G</h2>
+                    <p class="card-role">Co-Founder</p>
+                    <p class="card-email">nagasudharshan@gmail.com</p>
+                    <p><button class="button"><a href="#">Contact</a></button></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <!-- Add the image source here -->
+                    <img src="shash.JPG" alt="Naga Sudarshan C G">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-name">M Shashank Bharadwaj</h2>
+                    <p class="card-role">Co-Founder</p>
+                    <p class="card-email">shashank@gmail.com</p>
+                    <p><button class="button"><a href="#">Contact</a></button></p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleInfo() {
+            var moreInfo = document.getElementById("moreInfo");
+            if (moreInfo.style.display === "none") {
+                moreInfo.style.display = "block";
+            } else {
+                moreInfo.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
