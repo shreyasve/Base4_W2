@@ -245,8 +245,8 @@
   background-position: center;
   background-size: cover;
   background-image: url("nature.jpg");
-  min-height: 75%;
 }
+
 tag {
     color: black;
 }
@@ -292,6 +292,16 @@ tag {
             padding: 10px;
         }
 
+      .fade{
+        opacity: 1;
+        transition: opacity 230ms ease-in-out;
+      }
+
+      .fade:hover{
+        opacity:75%;
+      }
+        
+
     </style>
     <title>DashBoard</title>
 </head>
@@ -310,7 +320,7 @@ tag {
             </ul>
         </nav>
     </header>
-<header class="bgimg" id="home">
+<header class="bgimg , fade" id="home">
     <div class="display-bottomleft"><br><br>    
       <span class="tag">Calculate your Carbon Footprint</span>
     </div>
@@ -332,7 +342,7 @@ tag {
             
 
             <div class="column">
-                <h2>Your Country</h2>
+                <h3>Your Country</h3>
             <select id="country" class="select-box">
                 <option value="">--Select--</option>
                 <option value="India">India</option>
