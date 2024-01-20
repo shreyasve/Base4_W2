@@ -10,8 +10,13 @@ def get_db_connection():
 def signup():
     connection = get_db_connection()
     cursor = connection.cursor()
+    
     username = request.form['username']
+    email = request.form['email']
+    location = request.form['location']
+    phone = request.form['phone']
     password = request.form['password']
+    
     confirm_password = request.form['confirm_password']
 
     if password != confirm_password:
@@ -19,6 +24,6 @@ def signup():
 
     # Hash the password
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-    cursor.execute("INSERT INTO signin (username, password) VALUES (%s, %s)", (username, hashed_password))
+    cursor.execute("INSERT INTO signin (username, password,email,location,phone) VALUES (%s, %s,%s,%s,%d)", (username, hashed_password,email,location,phone))
     connection.commit()
     return redirect('/signin')
