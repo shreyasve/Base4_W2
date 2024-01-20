@@ -233,6 +233,10 @@
             margin-left: 100px;
             margin-right:100px;
         }
+        .badge {
+            max-width: 100px;
+            margin-top: 20px;
+        }
 
         canvas {
             width: 100%;
@@ -291,6 +295,13 @@ tag {
             margin-bottom: 10px;
             padding: 10px;
         }
+        .square {
+border: 1px solid black;
+padding: 10px;
+width: 700px;
+align-items: center;
+display: inline-block;
+}
 
     </style>
     <title>DashBoard</title>
@@ -382,9 +393,14 @@ tag {
                 <h3>Total Carbon Footprint</h3>
                 <p id="total"></p>
                 <p id="warning"></p>
+                
+                <div class="square"><h4>Recommendations</h4><p id="personalrecomendations1"><p id="personalrecomendations2"><p id="personalrecomendations3"><p id="personalrecomendations4"><p id="personalrecomendations5"><p id="personalrecomendations6"><p id="personalrecomendations7"></p></div>
+                
             </div>
         </div>
         <canvas id="myChart" style="width:150%;max-width:900px";align-items:center></canvas>
+        <br><br><br>
+        <img src="" alt="Badge" id="badge" class="badge">
         <br><br><br>
         <h2>Support Us</h2>
     <p>If you find our website helpful, consider making a donation to support our work.</p>
@@ -448,7 +464,28 @@ tag {
             document.getElementById('total').innerText = `🌍 Your total carbon footprint is: ${totalEmissions} tonnes CO2 per year`;
             document.getElementById('warning').innerText =
                 "In 2021, CO2 emissions per capita for India was 1.9 tons of CO2 per capita. Between 1972 and 2021, CO2 emissions per capita of India grew substantially from 0.39 to 1.9 tons of CO2 per capita rising at an increasing annual rate that reached a maximum of 9.41% in 2021";
-        
+            
+            if((totalEmissions>1.9) && (distance>5)){
+                document.getElementById('personalrecomendations1').innerText ="Consider using public transport, carpooling, or switching to more fuel-efficient vehicles.Explore the possibility of walking or cycling for shorter distances.";
+            }
+            if((totalEmissions>1.9) && (airdistance>500)){
+                document.getElementById('personalrecomendations2').innerText ="Minimize air travel whenever possible.Choose direct flights as they generally have lower carbon emissions.";
+            }
+            if((totalEmissions>1.9) && (electricity>100)){
+                document.getElementById('personalrecomendations3').innerText ="Opt for energy-efficient appliances.Turn off lights and electronic devices when not in use.Consider using renewable energy sources if available.";
+            }
+            if((totalEmissions>1.9) && (meals>3)){
+                document.getElementById('personalrecomendations4').innerText ="Include more plant-based meals in your diet.Reduce food waste by planning meals and storing food properly.";
+            }
+            if((totalEmissions>1.9) && (waste>5)){
+                document.getElementById('personalrecomendations5').innerText ="Practice proper waste segregation and recycling.Reduce single-use plastics and choose eco-friendly alternatives.";
+            }
+            if((totalEmissions>1.9) && !(checkBox.checked)){
+                document.getElementById('personalrecomendations6').innerText ="start recycling newspapers to contribute to waste reduction.";
+            }
+            if(totalEmissions<1.9){
+                document.getElementById('personalrecomendations7').innerText ="Support environmental organizations and initiatives.Stay informed about sustainable practices and implement them in your daily life.Encourage others to adopt eco-friendly habits.";
+            }
             const xValues = ["Distance", "AirTravelDistance", "Electricity", "Food", "Waste"];
             const yValues = [parseFloat(transportationEmissions), parseFloat(airdistanceEmissions), parseFloat(electricityEmissions), parseFloat(dietEmissions), parseFloat(wasteEmissions)];
             const barColors = [
