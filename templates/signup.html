@@ -8,7 +8,7 @@
         
        body{
     
-    background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20220522/pngtree-abstract-light-blue-wavy-modern-curve-lines-with-clean-background-vector-image_1379860.jpg);
+        background-image: url('https://spadework.org.uk/wp-content/uploads/istockphoto-1387784358-170667a.jpg');
     
     background-size: cover;
     background-repeat:no-repeat ;
@@ -66,23 +66,34 @@ input{
 ::placeholder{
     color: #100f0f;
 }
+button:hover {
+      background-color: #ffffff;
+    }
+button{
+    margin-top: 50px;
+    width: 100%;
+    background-color: #165f1d;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 0px;
+}
 
 label {
             color: black;
             font-size: 18px;
             text-align: left;
         }
-button{
-    margin-top: 50px;
-    width: 100%;
-    background-color:#fb7a09;
-    color: white;
-    padding: 15px 0;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-}
+
+.logo {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50px;
+            
+        }
 
 
     </style>
@@ -92,7 +103,8 @@ button{
     <div class="signup-container">
        
         <form action="/signup" method="post" onsubmit="return validatePassword()">
-            <h1  style="text-align: center;">Sign Up</h1>
+            <h1 style="text-align: center; padding: 50px; padding-bottom: 0px;padding-top: 0px;"><img class="logo" src="https://img.freepik.com/free-vector/flat-design-carbon-footprint-label_23-2149404813.jpg" alt="Logo" width="80" >CARBOGRAPHY</h1>
+
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required style="color: black;">
 
@@ -103,7 +115,8 @@ button{
             <input type="password" id="confirm_password" name="confirm_password" required>
 
             <button type="submit">Sign Up</button>
-            <button onclick="sign()">Already signed up? Sign in</button>
+          
+            <p class="signup-link">Already have an account? <a href="signin.html">Sign In</a></p>
         </form>
         <script>
             function sign(){
