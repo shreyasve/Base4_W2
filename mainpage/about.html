@@ -308,13 +308,25 @@ body {
         } */
 
         footer {
-            background-color: #2b2b28;
+            background-color: #333;
             color: white;
             text-align: center;
             padding: 1rem;
-            position: fixed;
             bottom: 0;
             width: 100%;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+            font-weight: bold;
         }
         
         .bgimg {
@@ -456,6 +468,17 @@ body {
             </div>
         </div>
     </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="main1.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="comment.html">Comments</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <p>&copy; 2024 Carbography. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
         function toggleInfo() {
