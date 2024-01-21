@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="Screenshot 2024-01-20 160004.png" type="image/x-icon">
+    <style>
+        
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+
+.chatbot-toggler {
+  position: fixed;
+  bottom: 20px;
+  right: 70px;
+  outline: none;
+  border: none;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #4caf50;
+  transition: all 0.2s ease;
+}
+body.show-chatbot .chatbot-toggler {
+  transform: rotate(90deg);
+}
+.chatbot-toggler span {
+  color: #fff;
+  position: absolute;
+}
+.chatbot-toggler span:last-child,
+body.show-chatbot .chatbot-toggler span:first-child  {
+  opacity: 0;
+}
+body.show-chatbot .chatbot-toggler span:last-child {
+  opacity: 1;
+}
+.chatbot {
+  position: fixed;
+  right: 35px;
+  bottom: 90px;
+  width: 420px;
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.5);
+  transform-origin: bottom right;
+  box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
+              0 32px 64px -48px rgba(0,0,0,0.5);
+  transition: all 0.1s ease;
+}
+body.show-chatbot .chatbot {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+.chatbot header {
+  padding: 16px 0;
+  position: relative;
+  text-align: center;
+  color: #fff;
+  background: #4caf50;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.chatbot header span {
+  position:absolute;
+  right: 15px;
+  top: 50%;
+  display: none;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+header h2 {
+  font-size: 1.4rem;
+}
+.chatbot .chatbox {
+  overflow-y: auto;
+  height: 510px;
+  padding: 30px 20px 100px;
+}
+.chatbot :where(.chatbox, textarea)::-webkit-scrollbar {
+  width: 6px;
+}
+.chatbot :where(.chatbox, textarea)::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 25px;
+}
+.chatbot :where(.chatbox, textarea)::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 25px;
+}
+.chatbox .chat {
+  display: flex;
+  list-style: none;
+}
+.chatbox .outgoing {
+  margin: 20px 0;
+  justify-content: flex-end;
+}
+.chatbox .incoming span {
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  cursor: default;
+  text-align: center;
+  line-height: 32px;
+  align-self: flex-end;
+  background: #4caf50;
+  border-radius: 4px;
+  margin: 0 10px 7px 0;
+}
+.chatbox .chat p {
+  white-space: pre-wrap;
+  padding: 12px 16px;
+  border-radius: 10px 10px 0 10px;
+  max-width: 75%;
+  color: #fff;
+  font-size: 0.95rem;
+  background: #4caf50;
+}
+.chatbox .incoming p {
+  border-radius: 10px 10px 10px 0;
+}
+.chatbox .chat p.error {
+  color: #721c24;
+  background: #f8d7da;
+}
+.chatbox .incoming p {
+  color: #000;
+  background: #f2f2f2;
+}
+.chatbot .chat-input {
+  display: flex;
+  gap: 5px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  padding: 3px 20px;
+  border-top: 1px solid #ddd;
+}
+.chat-input textarea {
+  height: 55px;
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  max-height: 180px;
+  padding: 15px 15px 15px 0;
+  font-size: 0.95rem;
+}
+.chat-input span {
+  align-self: flex-end;
+  color: #4caf50;
+  cursor: pointer;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+  font-size: 1.35rem;
+}
+.chat-input textarea:valid ~ span {
+  visibility: visible;
+}
+
+@media (max-width: 490px) {
+  .chatbot-toggler {
+    right: 20px;
+    bottom: 20px;
+  }
+  .chatbot {
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    border-radius: 0;
+    width: 100%;
+  }
+  .chatbot .chatbox {
+    height: 90%;
+    padding: 25px 15px 100px;
+  }
+  .chatbot .chat-input {
+    padding: 5px 15px;
+  }
+  .chatbot header span {
+    display: block;
+  }
+}
+body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 1rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .about {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .about-info {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .team {
+            background-color: #f4f4f4;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .team h1 {
+            color: #333;
+        }
+
+        .team-cards {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        /* .card:hover {
+            transform: scale(1.05);
+        } */
+
+        .card-img img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-info {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .button {
+            background-color: #ffffff;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* .button:hover {
+            background-color: #555;
+        } */
+
+        footer {
+            background-color: #2b2b28;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("nature2.webp");
+  min-height: 75%;
+  /* opacity: 1;
+    transition: opacity 0.5s ease-in-out; */
+}
+
+/* .fade{
+        opacity: 1;
+        transition: opacity 10ms ease-in-out;
+      } */
+
+    </style>
+    <title>About</title>
+</head>
+
+<body>
+    <button class="chatbot-toggler">
+        <span class="material-symbols-rounded">C</span>
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <div class="chatbot">
+        <header>
+          <h2>Chatbot</h2>
+          <span class="close-btn material-symbols-outlined">close</span>
+        </header>
+        <ul class="chatbox">
+          <li class="chat incoming">
+            <!-- <span class="material-symbols-outlined">smart_toy</span> -->
+            <p>Hi there 👋<br>How can I help you today?</p>
+          </li>
+        </ul>
+        <div class="chat-input">
+          <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+          <span id="send-btn" class="material-symbols-rounded">send</span>
+        </div>
+      </div>
+    <header>
+        <nav>
+            <div class="logo">
+                CarbonFootPrint
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+<header class="bgimg" id="home">
+    <div class="display-bottomleft"><br><br>    
+      <span class="tag">Hello!</span>
+    </div>
+    <br><br><br>
+    <div class="display-middle">
+      <span class="text-white" style="font-size:90px">Carbography<br></span>
+      <br><br>
+    </div>
+    <div class="display-bottomright">
+      <span class="text-white">Your Eco-Calculator</span>
+    </div>
+  </header>
+  
+  <div class="sand">
+
+    <section class="about">
+        <h1>About</h1>
+        <p style="font-weight: bold">
+            Welcome to our About page, where we explore our commitment to sustainability and reducing our carbon footprint.
+        </p>
+        <div class="about-info">
+            <div class="about-img">
+                <img src="Screenshot 2024-01-20 160004.png" width= 300px height= 300px ="CarbonFootPrint">
+            </div>
+            <div>
+                <p>Welcome to our website! We're your go-to source for understanding and calculating carbon footprints. In a world where environmental awareness is crucial, we aim to provide simple and accessible information about carbon footprints. Whether you're an individual or a business, understanding your carbon footprint is the first step towards making environmentally conscious choices.</p>
+                <div class="hidden-info" id="moreInfo">
+                    <p>Explore our user-friendly tools and resources designed to help you calculate and comprehend your carbon impact. We believe that knowledge is power, and by making informed decisions, we can all contribute to a greener and more sustainable future. Dive into the world of carbon footprint calculation with us, and let's work together to reduce our collective environmental impact.</p>
+                </div>
+                <button onclick="toggleInfo()">Read More...</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="team">
+        <h1>Meet Our Team</h1>
+        <div class="team-cards">
+            <div class="card">
+                <div class="card-img ">
+                    <img src="shreyas.jpg" alt="User 1">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-name">Shreyas V E</h2>
+                    <p class="card-role">CEO and Founder</p>
+                    <p class="card-email">shreyasve@gmail.com</p>
+                    <p><button class="button"><a href="#">Contact</a></button></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="pra.jpg" alt="User 2">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-name">Pramukh B V</h2>
+                    <p class="card-role">Co-Founder</p>
+                    <p class="card-email">pramukhvishwanath@gmial.com</p>
+                    <p><button class="button"><a href="#">Contact</a></button></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <!-- Add the image source here -->
+                    <img src="naga.jpg" alt="Naga Sudarshan C G">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-name">Naga Sudarshan C G</h2>
+                    <p class="card-role">Co-Founder</p>
+                    <p class="card-email">nagasudharshan@gmail.com</p>
+                    <p><button class="button"><a href="#">Contact</a></button></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="shash.JPG" alt="Naga Sudarshan C G">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-name">M Shashank Bharadwaj</h2>
+                    <p class="card-role">Co-Founder</p>
+                    <p class="card-email">shashank@gmail.com</p>
+                    <p><button class="button"><a href="#">Contact</a></button></p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleInfo() {
+            var moreInfo = document.getElementById("moreInfo");
+            if (moreInfo.style.display === "none") {
+                moreInfo.style.display = "block";
+            } else {
+                moreInfo.style.display = "none";
+            }
+        }
+    </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script>
+    // document.addEventListener('scroll', function () {
+    //     var scrollTop = window.scrollY;
+    //     var bgimg = document.querySelector('.bgimg');
+
+    //     // Calculate the opacity based on the scroll position
+    //     var opacity = 1 - (scrollTop / 700); // You can adjust the divisor for a smoother or faster fade
+
+    //     // Ensure the opacity is within the valid range [0, 1]
+    //     opacity = Math.min(1, Math.max(0, opacity));
+
+    //     // Set the opacity of the background image
+    //     bgimg.style.opacity = opacity;
+    // });
+
+    const chatbotToggler = document.querySelector(".chatbot-toggler");
+const closeBtn = document.querySelector(".close-btn");
+const chatbox = document.querySelector(".chatbox");
+const chatInput = document.querySelector(".chat-input textarea");
+const sendChatBtn = document.querySelector(".chat-input span");
+
+let userMessage = null; 
+
+const inputInitHeight = chatInput.scrollHeight;
+const API_KEY="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";
+const createChatLi = (message, className) => {
+    
+    const chatLi = document.createElement("li");
+    chatLi.classList.add("chat", className);
+    let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
+    chatLi.innerHTML = chatContent;
+    chatLi.querySelector("p").textContent = message;
+    return chatLi; 
+}
+
+const generateResponse = (incomingChatLi) => {
+    const API_URL = "https://api.openai.com/v1/chat/completions";
+    const messageElement = incomingChatLi.querySelector("p");
+
+    
+    const requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`
+        },
+        body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{role: "user", content: userMessage},
+            { "role": "system", "content": "You will answer only to queries related to nature and the environment. If it is not related, just say I am only authorized to answer questions related to Environment and nature. Do not answer to anything which is not related to environemt, nature, carbon, emissions" }      
+        ],
+        })
+    }
+
+    
+    fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
+        messageElement.textContent = data.choices[0].message.content.trim();
+    }).catch((error) => {
+        messageElement.textContent = "Oops! Something went wrong. Please try again.";
+    }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+}
+
+const handleChat = () => {
+    userMessage = chatInput.value.trim(); 
+    if(!userMessage) return;
+
+    
+    chatInput.value = "";
+    chatInput.style.height = `${inputInitHeight}px`;
+
+    
+    chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+    chatbox.scrollTo(0, chatbox.scrollHeight);
+    
+    setTimeout(() => {
+        
+        const incomingChatLi = createChatLi("Thinking...", "incoming");
+        chatbox.appendChild(incomingChatLi);
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+        generateResponse(incomingChatLi);
+    }, 600);
+}
+
+chatInput.addEventListener("input", () => {
+    
+    chatInput.style.height = `${inputInitHeight}px`;
+    chatInput.style.height = `${chatInput.scrollHeight}px`;
+});
+
+chatInput.addEventListener("keydown", (e) => {
+    
+    if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+        e.preventDefault();
+        handleChat();
+    }
+});
+
+sendChatBtn.addEventListener("click", handleChat);
+closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+</script>
+</body>
+
+</html>

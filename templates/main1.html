@@ -1,0 +1,756 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="Screenshot 2024-01-20 160004.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            margin: 0;
+
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .telegram-container {
+    position: fixed;
+    bottom: 20px; /* Adjust the distance from the bottom as needed */
+    right: 60px; /* Adjust the distance from the right as needed */
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.telegram {
+    display: block;
+}
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 1rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .about {
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 200px;
+        }
+
+        .about-info {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .team {
+            background-color: #f4f4f4;
+            padding: 2rem;
+            text-align: center;
+        }
+        .checkbox-container.column {
+    display: flex;
+    flex-direction: row; /* Arrange items horizontally */
+    align-items: center; /* Align items vertically in the center */
+}
+
+        .team h1 {
+            color: #333;
+        }
+
+        .team-cards {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-info {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .button {
+            background-color: #ffffff;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #3f862a;
+            border-radius: 4px;
+            outline: none;
+            transition: background-color 0.3s, border-color 0.3s;
+            cursor: pointer;
+            margin-right: 8px; 
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #3f862a;
+            border-color: #3f862a;
+        }
+
+        input[type="checkbox"]:checked::before {
+            content: '✔';
+            font-size: 14px;
+            color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #3f862a;
+        }
+
+        .select-box,
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #27531e;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4ec254;
+            color: #000;
+            padding: 13px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-top: 10px;
+            border: 1px solid #000;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button:hover {
+            color: #fff;
+            background-color: #000;
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+
+        .column {
+            margin-bottom: 15px;
+            margin-left: 200px;
+            margin-right: 200px;
+        }
+
+        .input {
+            padding: 8px;
+        }
+
+        label {
+            display: flex;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        donate{
+            margin-left: 100px;
+            margin-right:100px;
+        }
+        .badge {
+            max-width: 100px;
+            margin-top: 20px;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("nature.jpg");
+  min-height: 75%;
+}
+tag {
+    color: black;
+}
+.feedback-section {
+            margin-top: 20px;
+        }
+
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feedback-input {
+            margin-bottom: 10px;
+            width: 300px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .feedback-button {
+            background-color: #4ec254;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .feedback-button:hover {
+            background-color: #000;
+        }
+
+        .customer-feedback {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feedback-item {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        .square {
+border: 1px solid black;
+padding: 10px;
+width: 700px;
+display: inline-block;
+}
+.fuel-options {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+}
+
+.fuel-options .column {
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+}
+
+.fuel-options .column h3 {
+    margin-right: 0.5rem;
+}
+
+.fuel-options .column .radio-container {
+    margin-left: 0.5rem;
+}
+
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #3f862a;
+    border-radius: 50%;
+    outline: none;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+    margin-right: 8px; 
+}
+
+input[type="radio"]:checked {
+    background-color: #3f862a;
+    border-color: #3f862a;
+}
+.telegram{
+    margin-left: 95%;
+}
+input[type="radio"]:checked::before {
+    content: '✔';
+    font-size: 14px;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.meal-options {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+}
+
+.meal-options .column {
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+}
+
+.meal-options .column h3 {
+    margin-right: 0.5rem;
+}
+
+.meal-options .column .radio-container {
+    margin-left: 0.5rem;
+}
+
+    </style>
+    <title>DashBoard</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                CarbonFootPrint
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+<header class="bgimg" id="home">
+    <div class="display-bottomleft"><br><br>    
+      <span class="tag">Calculate your Carbon Footprint</span>
+    </div>
+    <br><br><br>
+    <div class="display-middle">
+      <span class="text-white" style="font-size:90px">Carbography<br></span>
+      <br><br>
+    </div>
+    <div class="display-bottomright">
+      <span class="text-white">Your Eco-Calculator</span><br><br>
+    </div>
+  </header>
+  
+  <div class="sand">
+  
+    <div class="about">
+
+        <div class="user-inputs">
+            
+
+            <div class="column">
+                <h2>Your Country</h2>
+            <select id="country" class="select-box">
+                <option value="">--Select--</option>
+                <option value="India">India</option>
+            </select>
+            <h2>Your State</h2>
+            <select id="state" class="select-box">
+                <option value="">--Select--</option>
+                <option value="Andaman & Nicobar">Andaman & Nicobar</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Dadra & Nagar Haveli">Dadra & Nagar Haveli</option>
+                <option value="Daman & Diu">Daman & Diu</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jammu & Kashmir">Jammu & Kashmir</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Lakshadweep">Lakshadweep</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Orissa">Orissa</option>
+                <option value="Pondicherry">Pondicherry</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+            </select>
+
+            <div class="fuel-options">
+                <div class="column">
+                    <h3>Petrol</h3>
+                    <div class="radio-container">
+                        <input type="radio" id="Petrol" name="fuelType" checked>
+                    </div>
+                </div>
+                <div class="column">
+                    <h3>Diesel</h3>
+                    <div class="radio-container">
+                        <input type="radio" id="Diesel" name="fuelType">
+                    </div>
+                </div>
+            </div>
+                <h3>Daily commute distance (in km)</h3>
+                <input type="number" id="distance" min="0">
+
+                <h3>Air travel distance (in km)</h3>
+                <input type="number" id="airdistanceInput" min="0">
+
+                <h3>Monthly electricity consumption (in kWh)</h3>
+                <input type="number" id="electricity" min="0">
+            </div>
+
+            <div class="column">
+                <h3>Waste generated per week (in kg)</h3>
+                <input type="number" id="wasteInput" min="0">
+
+                <div class="meal-options">
+                    <div class="column">
+                        <h3>Veg</h3>
+                        <div class="radio-container">
+                            <input type="radio" id="Veg" name="mealType" checked>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h3>NonVeg</h3>
+                        <div class="radio-container">
+                            <input type="radio" id="Nonveg" name="mealType">
+                        </div>
+                    </div>
+                </div>
+                <h3>Number of meals per day</h3>
+                <input type="number" id="meals" min="0">
+
+                <div class="column">
+                    <h3>Do you recycle Newspapers?</h3>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="myCheck">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="calculateEmissions()">Calculate CO2 Emissions</button>
+
+        <div class="results" id="results">
+            <h2>Results</h2>
+
+            <div class="column">
+                <h3>Carbon Emissions by Category</h3>
+                <p id="transportation"></p>
+                <p id="electricityResult"></p>
+                <p id="airdistanceResult"></p>
+                <p id="diet"></p>
+                <p id="wasteResult"></p>
+            </div>
+
+            <div class="column">
+                <h3>Total Carbon Footprint</h3>
+                <p id="total"></p>
+                <p id="warning"></p>
+                <p id="stateemission"></p>
+                
+                <div class="square"><h4>Recommendations</h4><p id="personalrecomendations1"><p id="personalrecomendations2"><p id="personalrecomendations3"><p id="personalrecomendations4"><p id="personalrecomendations5"><p id="personalrecomendations6"><p id="personalrecomendations7"></p></div>
+                
+            </div>
+        </div>
+        <canvas id="myChart" style="width:150%;max-width:900px";align-items:center></canvas>
+        <br><br><br>
+        <h2>Support Us</h2>
+    <p>If you find our website helpful, consider making a donation to support our work.</p>
+    <button onclick="redirectToDonationPage()">Donate Now</button>
+    </div>
+</div>
+<div class="telegram-container">
+    <a href="https://t.me/carboncalci_bot" class="telegram">
+        <img src="Telegram-logo.png" alt="Telegram-Bot" style="width:42px;height:42px;">
+    </a>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+            <a href="login.html">Login</a> 
+        </div>
+        <p>&copy; 2024 Carbography. All rights reserved.</p>
+    </div>
+</footer>
+    
+</section>
+    <script>
+        function calculateEmissions() {
+            const country = document.getElementById('country').value;
+            const stateName = document.getElementById('state').value;
+            const distance = document.getElementById('distance').value;
+            const airdistance = document.getElementById('airdistanceInput').value;
+            const electricity = document.getElementById('electricity').value;
+            const waste = document.getElementById('wasteInput').value;
+            const meals = document.getElementById('meals').value;
+            const checkBox = document.getElementById("myCheck");
+        
+            const normalizedDistance = distance > 0 ? (distance * 365).toFixed(2) : 0;
+            const normalizedElectricity = electricity > 0 ? (electricity * 12).toFixed(2) : 0;
+            const normalizedMeals = meals > 0 ? (meals * 365).toFixed(2) : 0;
+            const normalizedWaste = waste > 0 ? (waste * 52).toFixed(2) : 0;
+            
+            const isPetrolChecked = document.getElementById('Petrol').checked;
+            const fuelemission = isPetrolChecked ? 0.11 : 0.17;
+            const transportationEmissions = ((fuelemission * normalizedDistance) / 1000).toFixed(2);
+            const electricityEmissions = ((0.82 * normalizedElectricity) / 1000).toFixed(2);
+            const isvegChecked = document.getElementById('Veg').checked;
+            const mealemission = isvegChecked ? 0.22 : 0.88;
+            const dietEmissions = ((mealemission * normalizedMeals) / 1000).toFixed(2);
+            const wasteEmissions = ((0.1 * normalizedWaste) / 1000).toFixed(2);
+            const airdistanceEmissions = ((0.44 * airdistance) / 1000).toFixed(2);
+        
+            let totalEmissions = (
+                parseFloat(transportationEmissions) +
+                parseFloat(electricityEmissions) +
+                parseFloat(dietEmissions) +
+                parseFloat(wasteEmissions) +
+                parseFloat(airdistanceEmissions)
+            ).toFixed(2);
+        
+            if (checkBox.checked) {
+                totalEmissions = (totalEmissions - 0.059).toFixed(2);
+            }
+        
+            document.getElementById('transportation').innerText = `🚗 Transportation: ${transportationEmissions} tonnes CO2 per year`;
+            document.getElementById('electricityResult').innerText = `💡 Electricity: ${electricityEmissions} tonnes CO2 per year`;
+            document.getElementById('airdistanceResult').innerText = `✈️ Air Distance: ${airdistanceEmissions} tonnes CO2 per year`;
+            document.getElementById('diet').innerText = `🍽️ Diet: ${dietEmissions} tonnes CO2 per year`;
+            document.getElementById('wasteResult').innerText = `🗑️ Waste: ${wasteEmissions} tonnes CO2 per year`;
+        
+            document.getElementById('total').innerText = `🌍 Your total carbon footprint is: ${totalEmissions} tonnes CO2 per year`;
+            document.getElementById('warning').innerText =
+                "CO2 emissions per capita for India was 1.7 tons of CO2 per capita. Between 1972 and 2021, CO2 emissions per capita of India grew substantially from 0.39 to 1.7 tons of CO2 per capita rising at an increasing annual rate that reached a maximum of 9.41%";
+                document.getElementById('stateemission').innerText = `🌍 the average carbon footprint of your state is : ${getEmissionValue(stateName)} tonnes CO2 per year`;
+
+            
+            if((totalEmissions>1.9) && (distance>5)){
+                document.getElementById('personalrecomendations1').innerText ="Consider using public transport, carpooling, or switching to more fuel-efficient vehicles.Explore the possibility of walking or cycling for shorter distances.";
+            }
+            if((totalEmissions>1.9) && (airdistance>500)){
+                document.getElementById('personalrecomendations2').innerText ="Minimize air travel whenever possible.Choose direct flights as they generally have lower carbon emissions.";
+            }
+            if((totalEmissions>1.9) && (electricity>100)){
+                document.getElementById('personalrecomendations3').innerText ="Opt for energy-efficient appliances.Turn off lights and electronic devices when not in use.Consider using renewable energy sources if available.";
+            }
+            if((totalEmissions>1.9) && (meals>3)){
+                document.getElementById('personalrecomendations4').innerText ="Include more plant-based meals in your diet.Reduce food waste by planning meals and storing food properly.";
+            }
+            if((totalEmissions>1.9) && (waste>5)){
+                document.getElementById('personalrecomendations5').innerText ="Practice proper waste segregation and recycling.Reduce single-use plastics and choose eco-friendly alternatives.";
+            }
+            if((totalEmissions>1.9) && !(checkBox.checked)){
+                document.getElementById('personalrecomendations6').innerText ="start recycling newspapers to contribute to waste reduction.";
+            }
+            if(totalEmissions<1.9){
+                document.getElementById('personalrecomendations7').innerText ="Support environmental organizations and initiatives.Stay informed about sustainable practices and implement them in your daily life.Encourage others to adopt eco-friendly habits.";
+            }
+            const xValues = ["Distance", "AirTravelDistance", "Electricity", "Food", "Waste"];
+            const yValues = [parseFloat(transportationEmissions), parseFloat(airdistanceEmissions), parseFloat(electricityEmissions), parseFloat(dietEmissions), parseFloat(wasteEmissions)];
+            const barColors = [
+                "#b91d47",
+                "#00aba9",
+                "#2b5797",
+                "#e8c3b9",
+                "#1e7145"
+            ];
+            new Chart("myChart", {
+                type: "doughnut",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Your Carbon Emissions"
+                    }
+                }
+            });
+        }
+        function getEmissionValue(stateName) {
+    if (stateName === "Andaman & Nicobar") {
+        return 1.94;
+    } else if (stateName === "Andhra Pradesh") {
+        return 1.50;
+    } else if (stateName === "Arunachal Pradesh") {
+        return 0.37;
+    } else if (stateName === "Assam") {
+        return 0.33;
+    } else if (stateName === "Bihar") {
+        return 0.35;
+    } else if (stateName === "Chandigarh") {
+        return 0.74;
+    } else if (stateName === "Chhattisgarh") {
+        return 3.90;
+    } else if (stateName === "Dadra & Nagar Haveli") {
+        return 1.29;
+    } else if (stateName === "Daman & Diu") {
+        return 1.70;
+    } else if (stateName === "Delhi") {
+        return 1.15;
+    } else if (stateName === "Goa") {
+        return 1.60;
+    } else if (stateName === "Gujarat") {
+        return 1.68;
+    } else if (stateName === "Haryana") {
+        return 1.67;
+    } else if (stateName === "Himachal Pradesh") {
+        return 0.38;
+    } else if (stateName === "Jammu & Kashmir") {
+        return 0.32;
+    } else if (stateName === "Jharkhand") {
+        return 0.95;
+    } else if (stateName === "Karnataka") {
+        return 0.88;
+    } else if (stateName === "Kerala") {
+        return 0.47;
+    } else if (stateName === "Lakshadweep") {
+        return 1.72;
+    } else if (stateName === "Madhya Pradesh") {
+        return 1.36;
+    } else if (stateName === "Maharashtra") {
+        return 1.40;
+    } else if (stateName === "Manipur") {
+        return 0.27;
+    } else if (stateName === "Meghalaya") {
+        return 0.40;
+    } else if (stateName === "Mizoram") {
+        return 0.28;
+    } else if (stateName === "Nagaland") {
+        return 0.20;
+    } else if (stateName === "Orissa") {
+        return 1.70;
+    } else if (stateName === "Pondicherry") {
+        return 1.10;
+    } else if (stateName === "Punjab") {
+        return 1.14;
+    } else if (stateName === "Rajasthan") {
+        return 0.91;
+    } else if (stateName === "Sikkim") {
+        return 0.43;
+    } else if (stateName === "Tamil Nadu") {
+        return 1.27;
+    } else if (stateName === "Tripura") {
+        return 0.80;
+    } else if (stateName === "Uttar Pradesh") {
+        return 0.77;
+    } else if (stateName === "Uttarakhand") {
+        return 0.37;
+    } else if (stateName === "West Bengal") {
+        return 1.07;
+    } else {
+        return "State not found";
+    }
+}
+        </script>
+        
+        </body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        </html>

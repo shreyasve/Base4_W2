@@ -61,7 +61,7 @@ def signin():
     user = cursor.fetchone()
 
     if user and user[2] and bcrypt.checkpw(password.encode('utf-8'), user[2].encode('utf-8')):
-        return render_template('dashboard.html', username=username)
+        return render_template('main1.html',username=username)
 
     return "Invalid username or password."
 
