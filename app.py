@@ -65,7 +65,21 @@ def signin():
 
     return "Invalid username or password."
 
+@app.route('/main1')
+def main1():
+    return render_template('main1.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/faq')
+def faq():
+    return render_template('faq.html')
+
+@app.route('/comment')
+def comment():
+    return render_template('comment.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

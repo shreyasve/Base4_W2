@@ -22,9 +22,9 @@
         }
         .telegram-container {
     position: fixed;
-    bottom: 20px; /* Adjust the distance from the bottom as needed */
-    right: 60px; /* Adjust the distance from the right as needed */
-    z-index: 1000; /* Ensure it appears above other elements */
+    bottom: 20px;
+    right: 60px; 
+    z-index: 1000; 
 }
 
 .telegram {
@@ -83,8 +83,8 @@
         }
         .checkbox-container.column {
     display: flex;
-    flex-direction: row; /* Arrange items horizontally */
-    align-items: center; /* Align items vertically in the center */
+    flex-direction: row; 
+    align-items: center; 
 }
 
         .team h1 {
@@ -264,7 +264,7 @@
         .bgimg {
   background-position: center;
   background-size: cover;
-  background-image: url("nature.jpg");
+  background-image: url("https://wallup.net/wp-content/uploads/2016/01/111509-landscape-nature.jpg");
   min-height: 75%;
 }
 tag {
@@ -398,10 +398,10 @@ input[type="radio"]:checked::before {
                 CarbonFootPrint
             </div>
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="/main1">Home</a></li>
+                <li><a href="/about">About</a></li>
+                
+                <li><a href="/comment">Comments</a></li>
             </ul>
         </nav>
     </header>
@@ -476,13 +476,19 @@ input[type="radio"]:checked::before {
                 <div class="column">
                     <h3>Petrol</h3>
                     <div class="radio-container">
-                        <input type="radio" id="Petrol" name="fuelType" checked>
+                        <input type="radio" id="Petrol" name="fuelType">
                     </div>
                 </div>
                 <div class="column">
                     <h3>Diesel</h3>
                     <div class="radio-container">
                         <input type="radio" id="Diesel" name="fuelType">
+                    </div>
+                </div>
+               <div class="column">
+                    <h3>EV</h3>
+                    <div class="radio-container">
+                        <input type="radio" id="EV" name="EV">
                     </div>
                 </div>
             </div>
@@ -547,30 +553,37 @@ input[type="radio"]:checked::before {
                 <p id="stateemission"></p>
                 
                 <div class="square"><h4>Recommendations</h4><p id="personalrecomendations1"><p id="personalrecomendations2"><p id="personalrecomendations3"><p id="personalrecomendations4"><p id="personalrecomendations5"><p id="personalrecomendations6"><p id="personalrecomendations7"></p></div>
-                
-            </div>
+                <br><br><br>
+                <div class="xyz">
+                    <p id="rewards"></p>
+                 </div>
+                 <br>
+                 <br>
+                 <br>
+                 </div>
         </div>
         <canvas id="myChart" style="width:150%;max-width:900px";align-items:center></canvas>
         <br><br><br>
+            
         <h2>Support Us</h2>
     <p>If you find our website helpful, consider making a donation to support our work.</p>
     <button onclick="redirectToDonationPage()">Donate Now</button>
     </div>
+
 </div>
 <div class="telegram-container">
     <a href="https://t.me/carboncalci_bot" class="telegram">
-        <img src="Telegram-logo.png" alt="Telegram-Bot" style="width:42px;height:42px;">
+        <img src="{{ url_for('static', filename='Telegram-logo.png') }}" alt="Telegram-Bot" style="width:42px;height:42px;">
     </a>
 </div>
 
 <footer>
     <div class="footer-content">
         <div class="footer-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
-            <a href="login.html">Login</a> 
+            <a href="/main1">Home</a>
+            <a href="/about">About</a>
+            <a href="/comment">Comments</a>
+            
         </div>
         <p>&copy; 2024 Carbography. All rights reserved.</p>
     </div>
@@ -587,22 +600,29 @@ input[type="radio"]:checked::before {
             const waste = document.getElementById('wasteInput').value;
             const meals = document.getElementById('meals').value;
             const checkBox = document.getElementById("myCheck");
-        
+            const isEVChecked = document.getElementById('EV').checked;
+            let fuelemission = isEVChecked ? 0 : (document.getElementById('Petrol').checked ? 0.11 : 0.17);
+            let electricityEmissions1 = 0;
+
             const normalizedDistance = distance > 0 ? (distance * 365).toFixed(2) : 0;
             const normalizedElectricity = electricity > 0 ? (electricity * 12).toFixed(2) : 0;
             const normalizedMeals = meals > 0 ? (meals * 365).toFixed(2) : 0;
             const normalizedWaste = waste > 0 ? (waste * 52).toFixed(2) : 0;
-            
-            const isPetrolChecked = document.getElementById('Petrol').checked;
-            const fuelemission = isPetrolChecked ? 0.11 : 0.17;
+
             const transportationEmissions = ((fuelemission * normalizedDistance) / 1000).toFixed(2);
-            const electricityEmissions = ((0.82 * normalizedElectricity) / 1000).toFixed(2);
-            const isvegChecked = document.getElementById('Veg').checked;
-            const mealemission = isvegChecked ? 0.22 : 0.88;
+            let electricityEmissions = ((0.82 * normalizedElectricity) / 1000).toFixed(2);
+            const mealemission = document.getElementById('Veg').checked ? 0.22 : 0.88;
             const dietEmissions = ((mealemission * normalizedMeals) / 1000).toFixed(2);
             const wasteEmissions = ((0.1 * normalizedWaste) / 1000).toFixed(2);
             const airdistanceEmissions = ((0.44 * airdistance) / 1000).toFixed(2);
-        
+
+            if (isEVChecked) {
+                fuelemission = 0;
+                electricityEmissions1 = ((0.82 * normalizedDistance) / 1000).toFixed(2);
+            }
+
+            electricityEmissions = (parseFloat(electricityEmissions) + parseFloat(electricityEmissions1)).toFixed(2);
+
             let totalEmissions = (
                 parseFloat(transportationEmissions) +
                 parseFloat(electricityEmissions) +
@@ -610,43 +630,47 @@ input[type="radio"]:checked::before {
                 parseFloat(wasteEmissions) +
                 parseFloat(airdistanceEmissions)
             ).toFixed(2);
-        
+
             if (checkBox.checked) {
                 totalEmissions = (totalEmissions - 0.059).toFixed(2);
             }
-        
+
             document.getElementById('transportation').innerText = `🚗 Transportation: ${transportationEmissions} tonnes CO2 per year`;
             document.getElementById('electricityResult').innerText = `💡 Electricity: ${electricityEmissions} tonnes CO2 per year`;
             document.getElementById('airdistanceResult').innerText = `✈️ Air Distance: ${airdistanceEmissions} tonnes CO2 per year`;
             document.getElementById('diet').innerText = `🍽️ Diet: ${dietEmissions} tonnes CO2 per year`;
             document.getElementById('wasteResult').innerText = `🗑️ Waste: ${wasteEmissions} tonnes CO2 per year`;
-        
+
             document.getElementById('total').innerText = `🌍 Your total carbon footprint is: ${totalEmissions} tonnes CO2 per year`;
             document.getElementById('warning').innerText =
                 "CO2 emissions per capita for India was 1.7 tons of CO2 per capita. Between 1972 and 2021, CO2 emissions per capita of India grew substantially from 0.39 to 1.7 tons of CO2 per capita rising at an increasing annual rate that reached a maximum of 9.41%";
-                document.getElementById('stateemission').innerText = `🌍 the average carbon footprint of your state is : ${getEmissionValue(stateName)} tonnes CO2 per year`;
+            document.getElementById('stateemission').innerText = `🌍 the average carbon footprint of your state is : ${getEmissionValue(stateName)} tonnes CO2 per year`;
 
-            
-            if((totalEmissions>1.9) && (distance>5)){
-                document.getElementById('personalrecomendations1').innerText ="Consider using public transport, carpooling, or switching to more fuel-efficient vehicles.Explore the possibility of walking or cycling for shorter distances.";
+            if ((totalEmissions > 1.9) && (distance > 5)) {
+                document.getElementById('personalrecomendations1').innerText = "Consider using public transport, carpooling, or switching to more fuel-efficient vehicles.Explore the possibility of walking or cycling for shorter distances.";
             }
-            if((totalEmissions>1.9) && (airdistance>500)){
-                document.getElementById('personalrecomendations2').innerText ="Minimize air travel whenever possible.Choose direct flights as they generally have lower carbon emissions.";
+            if ((totalEmissions > 1.9) && (airdistance > 500)) {
+                document.getElementById('personalrecomendations2').innerText = "Minimize air travel whenever possible.Choose direct flights as they generally have lower carbon emissions.";
             }
-            if((totalEmissions>1.9) && (electricity>100)){
-                document.getElementById('personalrecomendations3').innerText ="Opt for energy-efficient appliances.Turn off lights and electronic devices when not in use.Consider using renewable energy sources if available.";
+            if ((totalEmissions > 1.9) && (electricity > 100)) {
+                document.getElementById('personalrecomendations3').innerText = "Opt for energy-efficient appliances.Turn off lights and electronic devices when not in use.Consider using renewable energy sources if available.";
             }
-            if((totalEmissions>1.9) && (meals>3)){
-                document.getElementById('personalrecomendations4').innerText ="Include more plant-based meals in your diet.Reduce food waste by planning meals and storing food properly.";
+            if ((totalEmissions > 1.9) && (meals > 3)) {
+                document.getElementById('personalrecomendations4').innerText = "Include more plant-based meals in your diet.Reduce food waste by planning meals and storing food properly.";
             }
-            if((totalEmissions>1.9) && (waste>5)){
-                document.getElementById('personalrecomendations5').innerText ="Practice proper waste segregation and recycling.Reduce single-use plastics and choose eco-friendly alternatives.";
+            if ((totalEmissions > 1.9) && (waste > 5)) {
+                document.getElementById('personalrecomendations5').innerText = "Practice proper waste segregation and recycling.Reduce single-use plastics and choose eco-friendly alternatives.";
             }
-            if((totalEmissions>1.9) && !(checkBox.checked)){
-                document.getElementById('personalrecomendations6').innerText ="start recycling newspapers to contribute to waste reduction.";
+            if ((totalEmissions > 1.9) && !(checkBox.checked)) {
+                document.getElementById('personalrecomendations6').innerText = "start recycling newspapers to contribute to waste reduction.";
             }
-            if(totalEmissions<1.9){
-                document.getElementById('personalrecomendations7').innerText ="Support environmental organizations and initiatives.Stay informed about sustainable practices and implement them in your daily life.Encourage others to adopt eco-friendly habits.";
+            if (totalEmissions < 1.9) {
+                document.getElementById('personalrecomendations7').innerText = "Support environmental organizations and initiatives.Stay informed about sustainable practices and implement them in your daily life.Encourage others to adopt eco-friendly habits.";
+            }
+            if (totalEmissions < 2) {
+                document.getElementById('rewards').innerText = "CONGRATULATIONS 🥳🥳🥳🥳";
+            } else {
+                document.getElementById('rewards').innerText = "BETTER LUCK NEXT TIME! FOLLOW THE RECOMMENDATIONS AS PROVIDED AND REDUCE YOUR CARBON FOOTPRINT";
             }
             const xValues = ["Distance", "AirTravelDistance", "Electricity", "Food", "Waste"];
             const yValues = [parseFloat(transportationEmissions), parseFloat(airdistanceEmissions), parseFloat(electricityEmissions), parseFloat(dietEmissions), parseFloat(wasteEmissions)];
@@ -674,6 +698,7 @@ input[type="radio"]:checked::before {
                 }
             });
         }
+        
         function getEmissionValue(stateName) {
     if (stateName === "Andaman & Nicobar") {
         return 1.94;
@@ -748,6 +773,9 @@ input[type="radio"]:checked::before {
     } else {
         return "State not found";
     }
+}
+function checkEmissions() {
+    
 }
         </script>
         
