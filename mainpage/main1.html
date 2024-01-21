@@ -22,9 +22,9 @@
         }
         .telegram-container {
     position: fixed;
-    bottom: 20px; /* Adjust the distance from the bottom as needed */
-    right: 60px; /* Adjust the distance from the right as needed */
-    z-index: 1000; /* Ensure it appears above other elements */
+    bottom: 20px;
+    right: 60px; 
+    z-index: 1000; 
 }
 
 .telegram {
@@ -83,8 +83,8 @@
         }
         .checkbox-container.column {
     display: flex;
-    flex-direction: row; /* Arrange items horizontally */
-    align-items: center; /* Align items vertically in the center */
+    flex-direction: row; 
+    align-items: center; 
 }
 
         .team h1 {
@@ -398,10 +398,10 @@ input[type="radio"]:checked::before {
                 CarbonFootPrint
             </div>
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="main1.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="comment.html">Comments</a></li>
             </ul>
         </nav>
     </header>
@@ -547,15 +547,27 @@ input[type="radio"]:checked::before {
                 <p id="stateemission"></p>
                 
                 <div class="square"><h4>Recommendations</h4><p id="personalrecomendations1"><p id="personalrecomendations2"><p id="personalrecomendations3"><p id="personalrecomendations4"><p id="personalrecomendations5"><p id="personalrecomendations6"><p id="personalrecomendations7"></p></div>
-                
+                <br><br><br>
+                <div class="xyz">
+                    <p id="rewards"></p>
+                 </div>
+                 <br>
+                 <br>
+                 <br>
+                 <div class="square">
+                    <h3>Your Previous Values</h3>
+                    <p id="your previous values"></p>
+                 </div>
             </div>
         </div>
         <canvas id="myChart" style="width:150%;max-width:900px";align-items:center></canvas>
         <br><br><br>
+            
         <h2>Support Us</h2>
     <p>If you find our website helpful, consider making a donation to support our work.</p>
     <button onclick="redirectToDonationPage()">Donate Now</button>
     </div>
+
 </div>
 <div class="telegram-container">
     <a href="https://t.me/carboncalci_bot" class="telegram">
@@ -566,11 +578,10 @@ input[type="radio"]:checked::before {
 <footer>
     <div class="footer-content">
         <div class="footer-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
-            <a href="login.html">Login</a> 
+            <a href="main1.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="comment.html">Comments</a>
+            <a href="faq.html">FAQ</a>
         </div>
         <p>&copy; 2024 Carbography. All rights reserved.</p>
     </div>
@@ -648,6 +659,11 @@ input[type="radio"]:checked::before {
             if(totalEmissions<1.9){
                 document.getElementById('personalrecomendations7').innerText ="Support environmental organizations and initiatives.Stay informed about sustainable practices and implement them in your daily life.Encourage others to adopt eco-friendly habits.";
             }
+            if (totalEmissions < 2) {
+        document.getElementById('rewards').innerText = "CONGRATULATIONS 🥳🥳🥳🥳";
+    } else {
+        document.getElementById('rewards').innerText = "BETTER LUCK NEXT TIME! FOLLOW THE RECOMMENDATIONS AS PROVIDED AND REDUCE YOUR CARBON FOOTPRINT";
+    }
             const xValues = ["Distance", "AirTravelDistance", "Electricity", "Food", "Waste"];
             const yValues = [parseFloat(transportationEmissions), parseFloat(airdistanceEmissions), parseFloat(electricityEmissions), parseFloat(dietEmissions), parseFloat(wasteEmissions)];
             const barColors = [
@@ -674,6 +690,7 @@ input[type="radio"]:checked::before {
                 }
             });
         }
+        
         function getEmissionValue(stateName) {
     if (stateName === "Andaman & Nicobar") {
         return 1.94;
@@ -748,6 +765,9 @@ input[type="radio"]:checked::before {
     } else {
         return "State not found";
     }
+}
+function checkEmissions() {
+    
 }
         </script>
         
