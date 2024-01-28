@@ -1,2 +1,2 @@
-# Infothon
-<br>Repository for infothon<br>
+# Your Personal Carbon Calculator 
+<br><br>
