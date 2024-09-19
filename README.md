@@ -1,3 +1,6 @@
 # Your Personal Carbon Calculator 
 
-It is a web application to track and reduce an individual's carbon footprint by collecting basic consumption information. It includes an AI-enabled telegram chatbot and a login page.
+A web application to track and reduce individual carbon footprints by collecting user
+consumption data. Integrated an AI-enabled Telegram chatbot, powered by the OpenAI API, to
+provide personalized recommendations and real-time guidance for reducing carbon emissions.
+
